@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-public class Instantiate : MonoBehaviour
+public class ThiefSpawner : MonoBehaviour
 {
     private static Random _random = new Random();
 
     [SerializeField] private GameObject _pointsObject;
-    [SerializeField] private Thief _thiefPrefab;
-    [SerializeField] private float _instantiatePeriod;
+    [SerializeField] private Thief _prefab;
+    [SerializeField] private float _periodicity;
 
     private WaitForSeconds _wait;
-    private Coroutine _createInstanceCoroutine;
+    private Coroutine _thiefSpawnerCoroutine;
     private Point[] _points;
 
-    private IEnumerator CreateInstance()
+    private IEnumerator SpawnThief()
     {
         bool isPlaying = true;
 
@@ -23,15 +23,15 @@ public class Instantiate : MonoBehaviour
         {
             int pointIndex = _random.Next(0, _points.Length);
             Vector2 pointPosition = _points[pointIndex].transform.position;
-            Thief newThief = Instantiate(_thiefPrefab, pointPosition, Quaternion.identity);
+            Thief newThief = Instantiate(_prefab, pointPosition, Quaternion.identity);
             yield return _wait;
         }
     }
 
     private void Awake()
     {
-        _wait = new WaitForSeconds(_instantiatePeriod);
+        _wait = new WaitForSeconds(_periodicity);
         _points = _pointsObject.GetComponentsInChildren<Point>();
-        _createInstanceCoroutine = StartCoroutine(CreateInstance());
+        _thiefSpawnerCoroutine = StartCoroutine(SpawnThief());
     }
 }

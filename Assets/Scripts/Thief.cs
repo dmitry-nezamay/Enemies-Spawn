@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+
 public class Thief : MonoBehaviour
 {
     [SerializeField] private int _speed;
@@ -19,12 +21,12 @@ public class Thief : MonoBehaviour
         _animator = GetComponent<Animator>();
 
         IsFalling = true;
-        _animator.SetBool("IsFalling", IsFalling);
+        _animator.SetBool(ThiefAnimatorController.Params.IsFalling, IsFalling);
     }
 
     private void Update()
     {
-        _animator.SetBool("IsFalling", IsFalling);
+        _animator.SetBool(ThiefAnimatorController.Params.IsFalling, IsFalling);
 
         if (IsFalling == false)
             transform.Translate((transform.position.x < 0 ? Vector2.left : Vector2.right) * Time.deltaTime * _speed);

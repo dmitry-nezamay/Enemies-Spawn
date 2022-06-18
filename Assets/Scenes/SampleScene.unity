@@ -354,8 +354,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointsObject: {fileID: 1571682153}
-  _thiefPrefab: {fileID: 2729135071112383863, guid: 9f1e80b9b24b88342bc5bc47d273f3d1, type: 3}
-  _instantiatePeriod: 2
+  _prefab: {fileID: 2729135071112383863, guid: 9f1e80b9b24b88342bc5bc47d273f3d1, type: 3}
+  _periodicity: 2
 --- !u!1 &978929778
 GameObject:
   m_ObjectHideFlags: 0
